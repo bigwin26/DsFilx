@@ -4,7 +4,7 @@ import Home from "Routes/Home";
 import Search from "Routes/Search";
 import TV from "Routes/TV";
 
-const Router = () => {
+export default () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
@@ -14,5 +14,3 @@ const Router = () => {
     </Switch>
   );
 };
-
-export default Router;
