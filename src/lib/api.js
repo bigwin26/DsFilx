@@ -12,10 +12,12 @@ export const movieApi = {
   upcoming: () => api.get("movie/upcoming"),
   popular: () => api.get("movie/popular"),
   movieDetail: async id => {
-    await api.get(`movie/${id}`, { params: { append_to_response: "videos" } });
+    return await api.get(`movie/${id}`, {
+      params: { append_to_response: "videos" },
+    });
   },
   search: async term => {
-    await api.get("search/movie", {
+    return await api.get("search/movie", {
       params: { query: encodeURIComponent(term) },
     });
   },
@@ -28,6 +30,8 @@ export const tvApi = {
   tvDetail: id =>
     api.get(`tv/${id}`, { params: { append_to_response: "videos" } }),
   search: async term => {
-    await api.get("search/tv", { params: { query: encodeURIComponent(term) } });
+    return await api.get("search/tv", {
+      params: { query: encodeURIComponent(term) },
+    });
   },
 };

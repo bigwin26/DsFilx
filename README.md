@@ -18,3 +18,7 @@ Learning React and ES6 by building a Movie app
 - [x] Airing Today (TV)
 - [ ] TV Show Detail
 - [ ] Movie Detail
+
+## Pattern
+
+- [x] Container & Presenter Pattern
