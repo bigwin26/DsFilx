@@ -1,3 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-export default () => <div>Search</div>;
+const SearchPresenter = ({ movieResults, tvResults, loading, error }) => {
+  if (loading) {
+    return <div>loading</div>;
+  } else {
+    return <div>search</div>;
+  }
+};
+
+SearchPresenter.propTypes = {
+  movieResults: PropTypes.array,
+  tvResults: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  searchTerm: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+};
+
+export default SearchPresenter;
