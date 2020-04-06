@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import Home from "Components/Home";
-import Search from "Components/Search";
-import TV from "Components/TV";
-import Detail from "Components/Detail";
+import Home from "Routes/Home";
+import Search from "Routes/Search";
+import TV from "Routes/TV";
+import Detail from "Routes/Detail";
 
 export default () => {
   return (

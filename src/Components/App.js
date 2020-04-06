@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "Components/Router";
-import Header from "Components/Header";
-import GlobalStyles from "Components/GlobalStyles";
+import Header from "Components/Common/Header";
+import GlobalStyles from "Components/Common/GlobalStyles";
 
 function App() {
   return (

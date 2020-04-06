@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Loading from "../loading.gif";
+import Loading from "../../loading.gif";
 
 const Container = styled.div`
   height: 100vh;
