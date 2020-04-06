@@ -19,17 +19,17 @@ const Title = styled.span`
 const Grid = styled.div`
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, 125px);
   grid-gap: 20px;
   text-align: center;
-  img {
+  /*   img {
     width: 150px;
     height: 150px;
   }
   span {
     margin-top: 10px;
     display: inline-block;
-  }
+  } */
 `;
 
 const Section = ({ title, children }) => {

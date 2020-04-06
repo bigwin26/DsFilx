@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Section from "../../Components/Common/Section";
-import Loader from "../../Components/Common/Loader";
-import Message from "../../Components/Common/Message";
+import Section from "Components/Common/Section";
+import Loader from "Components/Common/Loader";
+import Message from "Components/Common/Message";
+import Poster from "Components/Common/Poster";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -45,14 +46,31 @@ const SearchPresenter = ({
           {movieResults && movieResults.length > 0 && (
             <Section title="Movie Results">
               {movieResults.map((movie) => (
-                <span key={movie.id}>{movie.title}</span>
+                <Poster
+                  id={movie.id}
+                  imageUrl={movie.poster_path}
+                  title={movie.original_title}
+                  rating={movie.vote_average}
+                  year={
+                    movie.release_date && movie.release_date.substring(0, 4)
+                  }
+                  isMovie={true}
+                />
               ))}
             </Section>
           )}
           {tvResults && tvResults.length > 0 && (
             <Section title="Show Results">
               {tvResults.map((show) => (
-                <span key={show.id}>{show.name}</span>
+                <Poster
+                  id={show.id}
+                  imageUrl={show.poster_path}
+                  title={show.original_title}
+                  rating={show.vote_average}
+                  year={
+                    show.first_air_date && show.first_air_date.substring(0, 4)
+                  }
+                />
               ))}
             </Section>
           )}
