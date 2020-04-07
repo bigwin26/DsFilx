@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Section from "Components/Common/Section";
 import Message from "Components/Common/Message";
 import Poster from "Components/Common/Poster";
+import Loader from "Components/Common/Loader";
 
 const Container = styled.div`
   padding: 0px 10px;
@@ -11,13 +13,24 @@ const Container = styled.div`
 
 const TvPresenter = ({ topRated, popular, airingToday, loading, error }) => {
   return loading ? (
-    <div>loading</div>
+    <>
+      <Helmet>
+        <title>Loading... | DSflix</title>
+      </Helmet>
+      <Loader />
+    </>
+  ) : error ? (
+    <Message text={error} color={"red"} />
   ) : (
     <Container>
+      <Helmet>
+        <title>TV Show | DSflix</title>
+      </Helmet>
       {topRated && topRated.length > 0 && (
         <Section title="Top Rated">
           {topRated.map((show) => (
             <Poster
+              key={show.id}
               id={show.id}
               imageUrl={show.poster_path}
               title={show.original_name}
@@ -31,6 +44,7 @@ const TvPresenter = ({ topRated, popular, airingToday, loading, error }) => {
         <Section title="Airing Today">
           {airingToday.map((show) => (
             <Poster
+              key={show.id}
               id={show.id}
               imageUrl={show.poster_path}
               title={show.original_name}
@@ -44,6 +58,7 @@ const TvPresenter = ({ topRated, popular, airingToday, loading, error }) => {
         <Section title="Popular">
           {popular.map((show) => (
             <Poster
+              key={show.id}
               id={show.id}
               imageUrl={show.poster_path}
               title={show.original_name}

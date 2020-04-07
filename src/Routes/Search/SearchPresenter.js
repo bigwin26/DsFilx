@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Section from "Components/Common/Section";
 import Loader from "Components/Common/Loader";
 import Message from "Components/Common/Message";
@@ -32,6 +33,9 @@ const SearchPresenter = ({
 }) => {
   return (
     <Container>
+      <Helmet>
+        <title>Search | DSflix</title>
+      </Helmet>
       <Form onSubmit={handleSubmit}>
         <Input
           placeholder="Search Movies or TV Show!"

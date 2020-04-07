@@ -12,7 +12,9 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   padding: 0px 10px;
-  background-color: rgba(20, 20, 20, 0.6);
+  /*background-color: rgba(20, 20, 20, 0.6);*/
+  background-color: black;
+  z-index: 2;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.8);
 `;
 
@@ -25,7 +27,7 @@ const Item = styled.li`
   height: 50px;
   text-align: center;
   border-bottom: 3px solid
-    ${props => (props.current ? "#c0392b" : "transparent")};
+    ${(props) => (props.current ? "#c0392b" : "transparent")};
   transition: border-bottom 0.5s ease-in-out;
 `;
 
@@ -42,8 +44,8 @@ export default withRouter(({ location: { pathname } }) => (
       <Item current={pathname === "/"}>
         <StyledLink to="/">Home</StyledLink>
       </Item>
-      <Item current={pathname === "/tv"}>
-        <StyledLink to="/tv">TV</StyledLink>
+      <Item current={pathname === "/show"}>
+        <StyledLink to="/show">TV</StyledLink>
       </Item>
       <Item current={pathname === "/search"}>
         <StyledLink to="/search">Search</StyledLink>

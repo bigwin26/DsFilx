@@ -13,20 +13,23 @@ export default withRouter(({ history, location, match }) => {
   const [loading, setLoading] = useState(true);
 
   const setData = useCallback(async () => {
+    console.log("111");
     try {
+      console.log("222");
       setLoading(true);
       if (pathname.includes("/movie/")) {
-        const {
-          data: { result: movieDetail },
-        } = await Api.movieApi.movieDetail(id);
+        console.log("333");
+        const { data: movieDetail } = await Api.movieApi.movieDetail(id);
         setResult(movieDetail);
+        console.log("444");
       } else if (pathname.includes("/show/")) {
-        const {
-          data: { result: showDetail },
-        } = await Api.tvApi.tvDetail(id);
+        console.log("555");
+        const { data: showDetail } = await Api.tvApi.tvDetail(id);
         setResult(showDetail);
+        console.log("666");
       }
     } catch (error) {
+      console.log("999");
       setError("존재하지 않는 정보입니다.");
     }
     setLoading(false);
@@ -36,8 +39,10 @@ export default withRouter(({ history, location, match }) => {
     if (isNaN(parseInt(id))) {
       push("/");
     }
-    setData();
-  }, [id, push, pathname, setData]);
+    if (result === null) {
+      setData();
+    }
+  }, [id, push, result, setData]);
 
   return <DetailPresenter result={result} error={error} loading={loading} />;
 });

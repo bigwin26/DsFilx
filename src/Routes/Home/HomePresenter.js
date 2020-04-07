@@ -1,25 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Section from "../../Components/Common/Section";
-import Loader from "../../Components/Common/Loader";
-import Message from "../../Components/Common/Message";
-import Poster from "../../Components/Common/Poster";
+import Helmet from "react-helmet";
+import Section from "Components/Common/Section";
+import Loader from "Components/Common/Loader";
+import Message from "Components/Common/Message";
+import Poster from "Components/Common/Poster";
 
 const Container = styled.div`
   padding: 0px 10px;
 `;
-const getPoster = (image) => `https://image.tmdb.org/t/p/original${image}`;
 
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => {
   return loading ? (
-    <Loader />
+    <>
+      <Helmet>
+        <title>Loading... | DSflix</title>
+      </Helmet>
+      <Loader />
+    </>
   ) : (
     <Container>
+      <Helmet>
+        <title>Movies | DSflix</title>
+      </Helmet>
       {nowPlaying && nowPlaying.length > 0 && (
         <Section title="Now Playing">
           {nowPlaying.map((movie) => (
             <Poster
+              key={movie.id}
               id={movie.id}
               imageUrl={movie.poster_path}
               title={movie.title}
@@ -34,6 +43,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => {
         <Section title="Up Coming">
           {upcoming.map((movie) => (
             <Poster
+              key={movie.id}
               id={movie.id}
               imageUrl={movie.poster_path}
               title={movie.title}
@@ -48,6 +58,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => {
         <Section title="Popular">
           {popular.map((movie) => (
             <Poster
+              key={movie.id}
               id={movie.id}
               imageUrl={movie.poster_path}
               title={movie.title}
