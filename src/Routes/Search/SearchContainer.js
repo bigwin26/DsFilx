@@ -24,13 +24,11 @@ export default () => {
       const {
         data: { results: movieResult },
       } = await Api.movieApi.search(searchTerm);
-      console.log("movie", movieResult);
       setMovieResults(movieResult);
 
       const {
         data: { results: tvResult },
       } = await Api.tvApi.search(searchTerm);
-      console.log("show", tvResult);
       setTvResults(tvResult);
     } catch (error) {
       setError("해당 정보를 찾지 못했습니다.");

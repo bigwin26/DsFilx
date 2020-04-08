@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Common/Loader";
+import Youtube from "Components/Common/Youtube";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -73,7 +74,20 @@ const Overview = styled.p`
   line-height: 2;
 `;
 
-const DetailPresenter = ({ result, error, loading }) => {
+const Icon = styled.img`
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  src: ${(props) => props.src};
+`;
+
+const DetailPresenter = ({
+  result,
+  error,
+  loading,
+  handleImgClick,
+  trVisible,
+}) => {
   return loading ? (
     <>
       <Helmet>
@@ -119,6 +133,17 @@ const DetailPresenter = ({ result, error, loading }) => {
                 )}
             </Item>
           </ItemContainer>
+          {result.videos.results.length > 0 && (
+            <Icon
+              src={require("assets/youtube_icon.png")}
+              onClick={handleImgClick}
+            />
+          )}
+          {trVisible && (
+            <Youtube
+              url={`https://www.youtube.com/watch?v=${result.videos.results[0].key}`}
+            />
+          )}
           <Overview>{result.overview}</Overview>
         </Data>
       </Content>

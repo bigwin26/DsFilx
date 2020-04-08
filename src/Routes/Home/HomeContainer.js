@@ -17,17 +17,14 @@ export default () => {
           data: { results: nowplaying },
         } = await Api.movieApi.nowPlaying();
         setNowPlaying(nowplaying);
-        console.log(nowplaying);
         const {
           data: { results: popular },
         } = await Api.movieApi.popular();
         setPopular(popular);
-        console.log(popular);
         const {
           data: { results: upcoming },
         } = await Api.movieApi.upcoming();
         setUpcoming(upcoming);
-        console.log(upcoming);
       } catch (error) {
         setError("영화정보를 불러올 수 없습니다.");
       }

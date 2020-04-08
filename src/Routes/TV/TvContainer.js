@@ -17,17 +17,14 @@ export default () => {
           data: { results: topRated },
         } = await Api.tvApi.topRated();
         setTopRated(topRated);
-        console.log(topRated);
         const {
           data: { results: popular },
         } = await Api.tvApi.popular();
         setPopular(popular);
-        console.log(popular);
         const {
           data: { results: airingToday },
         } = await Api.tvApi.airingToday();
         setAiringToday(airingToday);
-        console.log(airingToday);
       } catch (error) {
         setError("TV정보를 불러올 수 없습니다.");
       }

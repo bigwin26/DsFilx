@@ -26,7 +26,7 @@ Learning React and ES6 by building a Movie app
 ## REST..
 
 - Movie
-- [] Add Youtube Trailer in Detail Page
+- [x] Add Youtube Trailer in Detail Page
 - [] Add Production Company in Detail Page
 - [] Collections Link
 - [] Collections Route

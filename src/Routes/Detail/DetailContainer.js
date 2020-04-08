@@ -11,29 +11,28 @@ export default withRouter(({ history, location, match }) => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [trVisible, setTrVisible] = useState(false);
 
   const setData = useCallback(async () => {
-    console.log("111");
     try {
-      console.log("222");
       setLoading(true);
       if (pathname.includes("/movie/")) {
-        console.log("333");
         const { data: movieDetail } = await Api.movieApi.movieDetail(id);
         setResult(movieDetail);
-        console.log("444");
       } else if (pathname.includes("/show/")) {
-        console.log("555");
         const { data: showDetail } = await Api.tvApi.tvDetail(id);
         setResult(showDetail);
-        console.log("666");
       }
     } catch (error) {
-      console.log("999");
       setError("존재하지 않는 정보입니다.");
     }
     setLoading(false);
   }, [id, pathname]);
+
+  const handleImgClick = () => {
+    console.log("click");
+    setTrVisible(true);
+  };
 
   useEffect(() => {
     if (isNaN(parseInt(id))) {
@@ -44,5 +43,13 @@ export default withRouter(({ history, location, match }) => {
     }
   }, [id, push, result, setData]);
 
-  return <DetailPresenter result={result} error={error} loading={loading} />;
+  return (
+    <DetailPresenter
+      result={result}
+      error={error}
+      loading={loading}
+      handleImgClick={handleImgClick}
+      trVisible={trVisible}
+    />
+  );
 });
