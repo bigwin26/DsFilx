@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.js": "/dsflix/static/js/main.309a95b9.chunk.js",
-    "main.js.map": "/dsflix/static/js/main.309a95b9.chunk.js.map",
+    "main.js": "/dsflix/static/js/main.889c00c4.chunk.js",
+    "main.js.map": "/dsflix/static/js/main.889c00c4.chunk.js.map",
     "runtime-main.js": "/dsflix/static/js/runtime-main.3ba0bee3.js",
     "runtime-main.js.map": "/dsflix/static/js/runtime-main.3ba0bee3.js.map",
-    "static/js/2.61d4f7ca.chunk.js": "/dsflix/static/js/2.61d4f7ca.chunk.js",
-    "static/js/2.61d4f7ca.chunk.js.map": "/dsflix/static/js/2.61d4f7ca.chunk.js.map",
+    "static/js/2.db356d08.chunk.js": "/dsflix/static/js/2.db356d08.chunk.js",
+    "static/js/2.db356d08.chunk.js.map": "/dsflix/static/js/2.db356d08.chunk.js.map",
     "index.html": "/dsflix/index.html",
-    "precache-manifest.af8a94362e7e9b154d887473cd3d15af.js": "/dsflix/precache-manifest.af8a94362e7e9b154d887473cd3d15af.js",
+    "precache-manifest.162e9238595e50f2d9d1923198461c72.js": "/dsflix/precache-manifest.162e9238595e50f2d9d1923198461c72.js",
     "service-worker.js": "/dsflix/service-worker.js",
-    "static/js/2.61d4f7ca.chunk.js.LICENSE.txt": "/dsflix/static/js/2.61d4f7ca.chunk.js.LICENSE.txt",
+    "static/js/2.db356d08.chunk.js.LICENSE.txt": "/dsflix/static/js/2.db356d08.chunk.js.LICENSE.txt",
     "static/media/loading.gif": "/dsflix/static/media/loading.3d035a55.gif",
-    "static/media/noPosterSmall.png": "/dsflix/static/media/noPosterSmall.87a0eb6a.png"
+    "static/media/noPosterSmall.png": "/dsflix/static/media/noPosterSmall.87a0eb6a.png",
+    "static/media/youtube_icon.png": "/dsflix/static/media/youtube_icon.8a6f52a2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.3ba0bee3.js",
-    "static/js/2.61d4f7ca.chunk.js",
-    "static/js/main.309a95b9.chunk.js"
+    "static/js/2.db356d08.chunk.js",
+    "static/js/main.889c00c4.chunk.js"
   ]
 }
