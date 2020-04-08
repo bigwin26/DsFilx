@@ -1,5 +1,5 @@
 {
-  "name": "DsFilx",
+  "name": "dsflix",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -39,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://bigwin26.github.io/DsFilx"
+  "homepage": "https://bigwin26.github.io/dsflix"
 }
