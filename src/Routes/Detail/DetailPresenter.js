@@ -168,7 +168,8 @@ const DetailPresenter = ({
           )}
           {trVisible && (
             <Youtube
-              url={`https://www.youtube.com/watch?v=${result.videos.results[0].key}`}
+              src={result.videos.results[0].key}
+              title={result.title ? result.title : result.name}
             />
           )}
           <Overview>{result.overview}</Overview>
