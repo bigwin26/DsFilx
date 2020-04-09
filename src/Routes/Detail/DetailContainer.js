@@ -30,7 +30,6 @@ export default withRouter(({ history, location, match }) => {
   }, [id, pathname]);
 
   const handleImgClick = () => {
-    console.log("click");
     setTrVisible(true);
   };
 

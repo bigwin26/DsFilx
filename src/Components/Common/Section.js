@@ -14,6 +14,7 @@ const Container = styled.div`
 const Title = styled.span`
   font-size: 14px;
   font-weight: bold;
+  margin-left: 36px;
 `;
 
 const Grid = styled.div`
@@ -22,14 +23,7 @@ const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, 125px);
   grid-gap: 20px;
   text-align: center;
-  /*   img {
-    width: 150px;
-    height: 150px;
-  }
-  span {
-    margin-top: 10px;
-    display: inline-block;
-  } */
+  justify-content: center;
 `;
 
 const Section = ({ title, children }) => {

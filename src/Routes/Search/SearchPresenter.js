@@ -53,7 +53,7 @@ const SearchPresenter = ({
                 <Poster
                   id={movie.id}
                   imageUrl={movie.poster_path}
-                  title={movie.original_title}
+                  title={movie.title}
                   rating={movie.vote_average}
                   year={
                     movie.release_date && movie.release_date.substring(0, 4)
@@ -69,7 +69,7 @@ const SearchPresenter = ({
                 <Poster
                   id={show.id}
                   imageUrl={show.poster_path}
-                  title={show.original_title}
+                  title={show.name}
                   rating={show.vote_average}
                   year={
                     show.first_air_date && show.first_air_date.substring(0, 4)
