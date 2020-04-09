@@ -14,6 +14,8 @@ const ResponsiveBlock = styled.div`
 `;
 
 const Responsive = ({ children, ...rest }) => {
+  console.log("rest ", rest);
+  console.log("children ", children);
   return <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>;
 };
 

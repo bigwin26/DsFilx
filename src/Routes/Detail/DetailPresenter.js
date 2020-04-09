@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Common/Loader";
 import Youtube from "Components/Common/Youtube";
+import Message from "Components/Common/Message";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -11,6 +12,9 @@ const Container = styled.div`
   position: relative;
   padding: 50px;
   z-index: 0;
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
 `;
 
 const Backdrop = styled.div`
@@ -25,6 +29,10 @@ const Backdrop = styled.div`
   filter: blur(3px);
   opacity: 0.5;
   z-index: 1;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 40%;
+  }
 `;
 
 const Content = styled.div`
@@ -33,6 +41,10 @@ const Content = styled.div`
   height: 100%;
   position: relative;
   z-index: 1;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Cover = styled.div`
@@ -42,16 +54,28 @@ const Cover = styled.div`
   background-size: cover;
   background-position: center;
   border-radius: 5px;
+  @media (max-width: 768px) {
+    width: 40%;
+    height: 40%;
+  }
 `;
 
 const Data = styled.div`
   width: 70%;
   margin-left: 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+    margin-left: 0px;
+  }
 `;
 
 const Title = styled.h3`
   font-size: 40px;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    margin: 20px 0;
+  }
 `;
 
 const ItemContainer = styled.div`
@@ -72,6 +96,9 @@ const Overview = styled.p`
   opacity: 0.7;
   width: 50%;
   line-height: 2;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Icon = styled.img`
@@ -147,6 +174,7 @@ const DetailPresenter = ({
           <Overview>{result.overview}</Overview>
         </Data>
       </Content>
+      {error && <Message text={error} color={"#e74c3c"} />}
     </Container>
   );
 };

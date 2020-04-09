@@ -69,7 +69,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => {
           ))}
         </Section>
       )}
-      {error && <Message text={error} />}
+      {error && <Message text={error} color={"#e74c3c"} />}
     </Container>
   );
 };
