@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import StarRatings from "react-star-ratings";
 
 const Container = styled.div`
   font-size: 12px;
@@ -57,9 +58,12 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => {
             }
           />
           <Rating>
-            <span role="img" aria-label="rating">
-              ★
-            </span>
+            <StarRatings
+              rating={rating / 2}
+              starDimension="10px"
+              starSpacing="1px"
+              starRatedColor="#f1c40f"
+            />
             {""}
             {rating}/10
           </Rating>

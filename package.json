@@ -15,6 +15,7 @@
     "react-player": "^1.15.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-star-ratings": "^2.3.0",
     "styled-components": "^5.0.1",
     "styled-reset": "^4.1.2"
   },
