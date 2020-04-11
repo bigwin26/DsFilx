@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import Loader from "Components/Common/Loader";
 import Youtube from "Components/Common/Youtube";
 import Message from "Components/Common/Message";
+import Logo from "Components/Common/Logo";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -108,6 +109,36 @@ const Icon = styled.img`
   src: ${(props) => props.src};
 `;
 
+const EtcContainer = styled.div`
+  width: 50%;
+  height: 30%;
+  text-align: center;
+`;
+
+const Tab = styled.div`
+  background-color: black;
+  opacity: 0.5;
+  border-radius: 5px;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+`;
+
+const TabItem = styled.span`
+  font-size: 15px;
+  display: inline-block;
+  margin: 0 auto;
+  cursor: pointer;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+`;
+
 const DetailPresenter = ({
   result,
   error,
@@ -148,7 +179,10 @@ const DetailPresenter = ({
             </Item>
             <Divider>ㆍ</Divider>
             <Item>
-              {result.runtime ? result.runtime : result.episode_run_time[0]}min
+              {result.runtime || result.runtime === 0
+                ? result.runtime
+                : result.episode_run_time[0]}
+              min
             </Item>
             <Divider>ㆍ</Divider>
             <Item>
@@ -173,6 +207,40 @@ const DetailPresenter = ({
             />
           )}
           <Overview>{result.overview}</Overview>
+          <EtcContainer>
+            <Tab>
+              {result.production_companies && (
+                <TabItem onClick={(e) => console.log(e.target.innerText)}>
+                  Production
+                </TabItem>
+              )}
+              {result.created_by && (
+                <TabItem onClick={(e) => console.log(e.target.innerText)}>
+                  Director
+                </TabItem>
+              )}
+              {result.belongs_to_collection && (
+                <TabItem onClick={(e) => console.log(e.target.innerText)}>
+                  Collection
+                </TabItem>
+              )}
+              {result.seasons && (
+                <TabItem onClick={(e) => console.log(e.target.innerText)}>
+                  Seasons
+                </TabItem>
+              )}
+            </Tab>
+            <LogoContainer>
+              {result.production_companies &&
+              result.production_companies.length > 1 ? (
+                result.production_companies.map((company) => (
+                  <Logo imageUrl={company.logo_path} />
+                ))
+              ) : (
+                <Logo imageUrl={result.production_companies[0].logo_path} />
+              )}
+            </LogoContainer>
+          </EtcContainer>
         </Data>
       </Content>
       {error && <Message text={error} color={"#e74c3c"} />}
