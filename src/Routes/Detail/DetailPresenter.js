@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import Loader from "Components/Common/Loader";
 import Youtube from "Components/Common/Youtube";
 import Message from "Components/Common/Message";
-import Logo from "Components/Common/Logo";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -109,43 +109,38 @@ const Icon = styled.img`
   src: ${(props) => props.src};
 `;
 
-const EtcContainer = styled.div`
-  width: 50%;
-  height: 30%;
-  text-align: center;
-`;
-
-const Tab = styled.div`
-  background-color: black;
-  opacity: 0.5;
-  border-radius: 5px;
-  width: 100%;
-  height: 20%;
+const LinkContainer = styled.ul`
+  margin-top: 20px;
+  margin-bottom: 30px;
   display: flex;
-  align-items: center;
 `;
 
-const TabItem = styled.span`
-  font-size: 15px;
-  display: inline-block;
-  margin: 0 auto;
-  cursor: pointer;
+const LinkItem = styled.li`
+  border-radius: 3px;
+  border: solid black 3px;
+  padding: 5px;
+  margin-right: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: ${(props) => (props.selected ? "black" : "white")};
+  opacity: ${(props) => (props.selected ? "0.8" : "0.5")};
+  background-color: ${(props) => (props.selected ? "white" : "black")};
 `;
 
-const LogoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
+const VideoContainer = styled.div`
+  margin: 10px 0;
+  overflow: auto;
+  white-space: nowrap;
+  iframe {
+    margin-right: 5px;
+  }
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const DetailPresenter = ({
-  result,
-  error,
-  loading,
-  handleImgClick,
-  trVisible,
-}) => {
+const DetailPresenter = ({ result, error, loading }) => {
   return loading ? (
     <>
       <Helmet>
@@ -195,52 +190,42 @@ const DetailPresenter = ({
             </Item>
           </ItemContainer>
           {result.videos.results.length > 0 && (
-            <Icon
-              src={require("assets/youtube_icon.png")}
-              onClick={handleImgClick}
-            />
-          )}
-          {trVisible && (
-            <Youtube
-              src={result.videos.results[0].key}
-              title={result.title ? result.title : result.name}
-            />
+            <>
+              <Icon src={require("assets/youtube_icon.png")} />
+              <VideoContainer>
+                {result.videos.results.map((video, index) => (
+                  <Youtube
+                    key={index}
+                    src={video.key}
+                    title={video.title ? video.title : video.name}
+                  />
+                ))}
+              </VideoContainer>
+            </>
           )}
           <Overview>{result.overview}</Overview>
-          <EtcContainer>
-            <Tab>
-              {result.production_companies && (
-                <TabItem onClick={(e) => console.log(e.target.innerText)}>
-                  Production
-                </TabItem>
-              )}
-              {result.created_by && (
-                <TabItem onClick={(e) => console.log(e.target.innerText)}>
-                  Director
-                </TabItem>
-              )}
-              {result.belongs_to_collection && (
-                <TabItem onClick={(e) => console.log(e.target.innerText)}>
-                  Collection
-                </TabItem>
-              )}
-              {result.seasons && (
-                <TabItem onClick={(e) => console.log(e.target.innerText)}>
-                  Seasons
-                </TabItem>
-              )}
-            </Tab>
-            <LogoContainer>
-              {result.production_companies &&
-              result.production_companies.length > 1 ? (
-                result.production_companies.map((company) => (
-                  <Logo imageUrl={company.logo_path} />
-                ))
-              ) : (
-                <Logo imageUrl={result.production_companies[0].logo_path} />
-              )}
-            </LogoContainer>
-          </EtcContainer>
+          <LinkContainer>
+            {result.production_companies && (
+              <LinkItem selected={true}>
+                <Link to="#">Production</Link>
+              </LinkItem>
+            )}
+            {result.created_by && (
+              <LinkItem selected={true}>
+                <Link to="#">Director</Link>
+              </LinkItem>
+            )}
+            {result.belongs_to_collection && (
+              <LinkItem selected={true}>
+                <Link to="#">Collection</Link>
+              </LinkItem>
+            )}
+            {result.seasons && (
+              <LinkItem selected={false}>
+                <Link to="#">Seasons</Link>
+              </LinkItem>
+            )}
+          </LinkContainer>
         </Data>
       </Content>
       {error && <Message text={error} color={"#e74c3c"} />}
