@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { withRouter, Route } from "react-router-dom";
 import Helmet from "react-helmet";
 import Loader from "Components/Common/Loader";
 import Youtube from "Components/Common/Youtube";
 import Message from "Components/Common/Message";
+import Poster from "Components/Common/Poster";
+import Logo from "Components/Common/Logo";
+import Section from "Components/Common/Section";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -109,13 +112,13 @@ const Icon = styled.img`
   src: ${(props) => props.src};
 `;
 
-const LinkContainer = styled.ul`
+const TabContainer = styled.ul`
   margin-top: 20px;
   margin-bottom: 30px;
   display: flex;
 `;
 
-const LinkItem = styled.li`
+const TabItem = styled.li`
   border-radius: 3px;
   border: solid black 3px;
   padding: 5px;
@@ -125,9 +128,11 @@ const LinkItem = styled.li`
   color: ${(props) => (props.selected ? "black" : "white")};
   opacity: ${(props) => (props.selected ? "0.8" : "0.5")};
   background-color: ${(props) => (props.selected ? "white" : "black")};
+  cursor: pointer;
 `;
 
 const VideoContainer = styled.div`
+  width: 640px;
   margin: 10px 0;
   overflow: auto;
   white-space: nowrap;
@@ -135,103 +140,172 @@ const VideoContainer = styled.div`
     margin-right: 5px;
   }
   -ms-overflow-style: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
-const DetailPresenter = ({ result, error, loading }) => {
-  return loading ? (
-    <>
-      <Helmet>
-        <title>Loading... | DSflix</title>
-      </Helmet>
-      <Loader />
-    </>
-  ) : (
-    <Container>
-      <Helmet>
-        <title>{result.title ? result.title : result.name} | DSflix</title>
-      </Helmet>
-      <Backdrop
-        Bgimg={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
-      />
-      <Content>
-        <Cover
-          Bgimg={
-            result.poster_path
-              ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-              : require("assets/noPosterSmall.png")
-          }
+const LogoContainer = styled.div`
+  background-color: white;
+  width: 50%;
+  border-radius: 3px;
+  background-color: grey;
+  opacity: 0.5;
+`;
+
+const DetailPresenter = withRouter(
+  ({ result, error, loading, handleOnClick, visible, match }) => {
+    return loading ? (
+      <>
+        <Helmet>
+          <title>Loading... | DSflix</title>
+        </Helmet>
+        <Loader />
+      </>
+    ) : (
+      <Container>
+        <Helmet>
+          <title>{result.title ? result.title : result.name} | DSflix</title>
+        </Helmet>
+        <Backdrop
+          Bgimg={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
         />
-        <Data>
-          <Title>{result.title ? result.title : result.name}</Title>
-          <ItemContainer>
-            <Item>
-              {result.release_date
-                ? result.release_date.substring(0, 4)
-                : result.first_air_date.substring(0, 4)}
-            </Item>
-            <Divider>ㆍ</Divider>
-            <Item>
-              {result.runtime || result.runtime === 0
-                ? result.runtime
-                : result.episode_run_time[0]}
-              min
-            </Item>
-            <Divider>ㆍ</Divider>
-            <Item>
-              {result.genres &&
-                result.genres.map((genre, index) =>
-                  index === result.genres.length - 1
-                    ? genre.name
-                    : `${genre.name} / `,
-                )}
-            </Item>
-          </ItemContainer>
-          {result.videos.results.length > 0 && (
-            <>
-              <Icon src={require("assets/youtube_icon.png")} />
-              <VideoContainer>
-                {result.videos.results.map((video, index) => (
-                  <Youtube
-                    key={index}
-                    src={video.key}
-                    title={video.title ? video.title : video.name}
+        <Content>
+          <Cover
+            Bgimg={
+              result.poster_path
+                ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                : require("assets/noPosterSmall.png")
+            }
+          />
+          <Icon
+            src={require("assets/youtube_icon.png")}
+            onClick={() => window.open(`${result.homepage}`)}
+          />
+          <Data>
+            <Title>{result.title ? result.title : result.name}</Title>
+            <ItemContainer>
+              <Item>
+                {result.release_date
+                  ? result.release_date.substring(0, 4)
+                  : result.first_air_date.substring(0, 4)}
+              </Item>
+              <Divider>ㆍ</Divider>
+              <Item>
+                {result.runtime || result.runtime === 0
+                  ? result.runtime
+                  : result.episode_run_time[0]}
+                min
+              </Item>
+              <Divider>ㆍ</Divider>
+              <Item>
+                {result.genres &&
+                  result.genres.map((genre, index) =>
+                    index === result.genres.length - 1
+                      ? genre.name
+                      : `${genre.name} / `,
+                  )}
+              </Item>
+            </ItemContainer>
+            <Overview>{result.overview}</Overview>
+            <TabContainer>
+              {result.production_companies && (
+                <TabItem
+                  onClick={handleOnClick}
+                  selected={visible === "Production"}
+                >
+                  Production
+                </TabItem>
+              )}
+              {result.created_by && (
+                <TabItem
+                  onClick={handleOnClick}
+                  selected={visible === "Director"}
+                >
+                  Director
+                </TabItem>
+              )}
+              {result.belongs_to_collection && (
+                <TabItem
+                  onClick={handleOnClick}
+                  selected={visible === "Collection"}
+                >
+                  Collection
+                </TabItem>
+              )}
+              {result.seasons && (
+                <TabItem
+                  onClick={handleOnClick}
+                  selected={visible === "Seasons"}
+                >
+                  Seasons
+                </TabItem>
+              )}
+              {result.videos && result.videos.results.length > 0 && (
+                <TabItem
+                  onClick={handleOnClick}
+                  selected={visible === "Trailer"}
+                >
+                  Trailer
+                </TabItem>
+              )}
+            </TabContainer>
+            {result.production_companies && visible === "Production" && (
+              <LogoContainer>
+                <Logo data={result.production_companies} group="logo" />
+              </LogoContainer>
+            )}
+            {result.created_by && visible === "Director" && (
+              <Section>
+                {result.created_by.map((director) => (
+                  <Poster
+                    key={director.id}
+                    id={director.id}
+                    imageUrl={director.profile_path}
+                    title={director.name}
                   />
                 ))}
-              </VideoContainer>
-            </>
-          )}
-          <Overview>{result.overview}</Overview>
-          <LinkContainer>
-            {result.production_companies && (
-              <LinkItem selected={true}>
-                <Link to="#">Production</Link>
-              </LinkItem>
+              </Section>
             )}
-            {result.created_by && (
-              <LinkItem selected={true}>
-                <Link to="#">Director</Link>
-              </LinkItem>
+            {result.belongs_to_collection && visible === "Collection" && (
+              <Section>
+                <Poster
+                  key={result.belongs_to_collection.id}
+                  id={result.belongs_to_collection.id}
+                  imageUrl={result.belongs_to_collection.poster_path}
+                  title={result.belongs_to_collection.name}
+                />
+              </Section>
             )}
-            {result.belongs_to_collection && (
-              <LinkItem selected={true}>
-                <Link to="#">Collection</Link>
-              </LinkItem>
+            {result.seasons && visible === "Seasons" && (
+              <Section>
+                {result.seasons.map((season) => (
+                  <Poster
+                    key={season.id}
+                    id={season.id}
+                    imageUrl={season.poster_path}
+                    title={season.name}
+                  />
+                ))}
+              </Section>
             )}
-            {result.seasons && (
-              <LinkItem selected={false}>
-                <Link to="#">Seasons</Link>
-              </LinkItem>
+            {result.videos.results.length > 0 && visible === "Trailer" && (
+              <>
+                <VideoContainer>
+                  {result.videos.results.map((video, index) => (
+                    <Youtube
+                      key={index}
+                      src={video.key}
+                      title={video.title ? video.title : video.name}
+                    />
+                  ))}
+                </VideoContainer>
+              </>
             )}
-          </LinkContainer>
-        </Data>
-      </Content>
-      {error && <Message text={error} color={"#e74c3c"} />}
-    </Container>
-  );
-};
+          </Data>
+        </Content>
+        {error && <Message text={error} color={"#e74c3c"} />}
+      </Container>
+    );
+  },
+);
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,

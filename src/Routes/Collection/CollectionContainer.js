@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import DetailPresenter from "./DetailPresenter";
+import React, { useEffect, useState, useCallback } from "react";
+import CollectionPresenter from "./CollectionPresenter";
 import { withRouter } from "react-router-dom";
 import * as Api from "../../lib/api";
 
 export default withRouter(({ history, location, match }) => {
-  console.log("location: ", location, "match: ", match);
   const { id } = match.params;
   const { push } = history;
   const { pathname } = location;
@@ -12,7 +11,6 @@ export default withRouter(({ history, location, match }) => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [visible, setVisible] = useState("Production");
 
   const setData = useCallback(async () => {
     try {
@@ -30,11 +28,6 @@ export default withRouter(({ history, location, match }) => {
     setLoading(false);
   }, [id, pathname]);
 
-  const handleOnClick = (e) => {
-    console.log(e.target.innerHTML);
-    setVisible(e.target.innerHTML);
-  };
-
   useEffect(() => {
     if (isNaN(parseInt(id))) {
       push("/");
@@ -42,15 +35,7 @@ export default withRouter(({ history, location, match }) => {
     if (result === null) {
       setData();
     }
-  }, [id, push, result, setData]);
+  }, []);
 
-  return (
-    <DetailPresenter
-      result={result}
-      error={error}
-      loading={loading}
-      handleOnClick={handleOnClick}
-      visible={visible}
-    />
-  );
+  return <CollectionPresenter />;
 });

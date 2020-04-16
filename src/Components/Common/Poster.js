@@ -57,21 +57,23 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => {
                 : require("assets/noPosterSmall.png")
             }
           />
-          <Rating>
-            <StarRatings
-              rating={rating / 2}
-              starDimension="10px"
-              starSpacing="1px"
-              starRatedColor="#f1c40f"
-            />
-            {""}
-            {rating}/10
-          </Rating>
+          {rating && (
+            <Rating>
+              <StarRatings
+                rating={rating / 2}
+                starDimension="10px"
+                starSpacing="1px"
+                starRatedColor="#f1c40f"
+              />
+              {""}
+              {rating}/10
+            </Rating>
+          )}
         </ImageContainer>
         <Title>
           {title.length > 11 ? `${title.substring(0, 11)}...` : title}
         </Title>
-        <Year>{year}</Year>
+        {year && <Year>{year}</Year>}
       </Container>
     </Link>
   );
@@ -84,6 +86,7 @@ Poster.propTypes = {
   rating: PropTypes.number,
   year: PropTypes.string,
   isMovie: PropTypes.bool,
+  isCollection: PropTypes.bool,
 };
 
 export default Poster;
