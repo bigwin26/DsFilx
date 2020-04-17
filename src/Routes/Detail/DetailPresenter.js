@@ -147,14 +147,15 @@ const TabItem = styled.li`
 `;
 
 const VideoContainer = styled.div`
-  width: 640px;
   margin: 10px 0;
   overflow: auto;
   white-space: nowrap;
   iframe {
     margin-right: 5px;
   }
-  -ms-overflow-style: none;
+  @media (max-width: 768px) {
+    -ms-overflow-style: none;
+  }
 `;
 
 const EtcContainer = styled.div`
