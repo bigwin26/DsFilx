@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { withRouter, Route } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet";
 import Loader from "Components/Common/Loader";
 import Youtube from "Components/Common/Youtube";
