@@ -73,7 +73,7 @@ const Cover = styled.div`
 
 const Data = styled.div`
   width: 70%;
-  margin-left: 10px;
+  margin-left: 30px;
   @media (max-width: 768px) {
     width: 100%;
     text-align: center;
