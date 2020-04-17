@@ -9,6 +9,9 @@ import Poster from "Components/Common/Poster";
 
 const Container = styled.div`
   padding: 0px 10px 0px 30px;
+  @media (max-width: 768px) {
+    padding: 0px 10px 0px 10px;
+  }
 `;
 
 const Form = styled.form`

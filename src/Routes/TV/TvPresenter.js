@@ -9,6 +9,9 @@ import Loader from "Components/Common/Loader";
 
 const Container = styled.div`
   padding: 0px 10px 0px 30px;
+  @media (max-width: 768px) {
+    padding: 0px 10px 0px 10px;
+  }
 `;
 
 const TvPresenter = ({ topRated, popular, airingToday, loading, error }) => {

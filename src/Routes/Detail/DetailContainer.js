@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import * as Api from "../../lib/api";
 
 export default withRouter(({ history, location, match }) => {
-  console.log("location: ", location, "match: ", match);
   const { id } = match.params;
   const { push } = history;
   const { pathname } = location;
@@ -31,7 +30,6 @@ export default withRouter(({ history, location, match }) => {
   }, [id, pathname]);
 
   const handleOnClick = (e) => {
-    console.log(e.target.innerHTML);
     setVisible(e.target.innerHTML);
   };
 
