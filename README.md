@@ -27,12 +27,12 @@ Learning React and ES6 by building a Movie app
 
 - Movie
 - [x] Add Youtube Trailer in Detail Page
-- [] Add Production Company in Detail Page
+- [x] Add Production Company in Detail Page
 - [] Collections Link
 - [] Collections Route
 
 - TV Show
-- [] Actor or Creator List
+- [x] Actor or Creator List
 - [] Season Link
 - [] Seaseon Route
 

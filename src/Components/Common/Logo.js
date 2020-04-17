@@ -16,11 +16,12 @@ const LogoContainer = styled.div`
 `;
 
 const StyledSpan = styled.span`
-  color: black;
+  color: white;
   font-size: 16px;
   :not(:last-child) {
     margin-right: 10px;
   }
+  opacity: 0.7;
 `;
 
 const Logo = ({ data }) => {

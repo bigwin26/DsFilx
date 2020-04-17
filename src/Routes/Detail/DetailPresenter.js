@@ -51,17 +51,24 @@ const Content = styled.div`
   }
 `;
 
-const Cover = styled.div`
+const CoverContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 30%;
+  height: 100%;
+  @media (max-width: 768px) {
+    width: 40%;
+    height: 40%;
+  }
+`;
+
+const Cover = styled.div`
+  width: 100%;
   height: 100%;
   background-image: url(${(props) => props.Bgimg});
   background-size: cover;
   background-position: center;
   border-radius: 5px;
-  @media (max-width: 768px) {
-    width: 40%;
-    height: 40%;
-  }
 `;
 
 const Data = styled.div`
@@ -71,6 +78,7 @@ const Data = styled.div`
     width: 100%;
     text-align: center;
     margin-left: 0px;
+    height: calc(100vh - 300px);
   }
 `;
 
@@ -110,12 +118,16 @@ const Icon = styled.img`
   height: 25px;
   cursor: pointer;
   src: ${(props) => props.src};
+  align-self: center;
 `;
 
 const TabContainer = styled.ul`
   margin-top: 20px;
   margin-bottom: 30px;
   display: flex;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 const TabItem = styled.li`
@@ -129,6 +141,9 @@ const TabItem = styled.li`
   opacity: ${(props) => (props.selected ? "0.8" : "0.5")};
   background-color: ${(props) => (props.selected ? "white" : "black")};
   cursor: pointer;
+  &:hover {
+    opacity: 0.1;
+  }
 `;
 
 const VideoContainer = styled.div`
@@ -142,12 +157,10 @@ const VideoContainer = styled.div`
   -ms-overflow-style: none;
 `;
 
-const LogoContainer = styled.div`
-  background-color: white;
-  width: 50%;
+const EtcContainer = styled.div`
+  width: 100%;
   border-radius: 3px;
-  background-color: grey;
-  opacity: 0.5;
+  opacity: 0.8;
 `;
 
 const DetailPresenter = withRouter(
@@ -168,17 +181,19 @@ const DetailPresenter = withRouter(
           Bgimg={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
         />
         <Content>
-          <Cover
-            Bgimg={
-              result.poster_path
-                ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-                : require("assets/noPosterSmall.png")
-            }
-          />
-          <Icon
-            src={require("assets/youtube_icon.png")}
-            onClick={() => window.open(`${result.homepage}`)}
-          />
+          <CoverContainer>
+            <Cover
+              Bgimg={
+                result.poster_path
+                  ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                  : require("assets/noPosterSmall.png")
+              }
+            />
+            <Icon
+              src={require("assets/youtube_icon.png")}
+              onClick={() => window.open(`${result.homepage}`)}
+            />
+          </CoverContainer>
           <Data>
             <Title>{result.title ? result.title : result.name}</Title>
             <ItemContainer>
@@ -214,7 +229,7 @@ const DetailPresenter = withRouter(
                   Production
                 </TabItem>
               )}
-              {result.created_by && (
+              {result.created_by && result.created_by.length > 0 && (
                 <TabItem
                   onClick={handleOnClick}
                   selected={visible === "Director"}
@@ -247,45 +262,45 @@ const DetailPresenter = withRouter(
                 </TabItem>
               )}
             </TabContainer>
-            {result.production_companies && visible === "Production" && (
-              <LogoContainer>
+            <EtcContainer>
+              {result.production_companies && visible === "Production" && (
                 <Logo data={result.production_companies} group="logo" />
-              </LogoContainer>
-            )}
-            {result.created_by && visible === "Director" && (
-              <Section>
-                {result.created_by.map((director) => (
+              )}
+              {result.created_by && visible === "Director" && (
+                <Section>
+                  {result.created_by.map((director) => (
+                    <Poster
+                      key={director.id}
+                      id={director.id}
+                      imageUrl={director.profile_path}
+                      title={director.name}
+                    />
+                  ))}
+                </Section>
+              )}
+              {result.belongs_to_collection && visible === "Collection" && (
+                <Section>
                   <Poster
-                    key={director.id}
-                    id={director.id}
-                    imageUrl={director.profile_path}
-                    title={director.name}
+                    key={result.belongs_to_collection.id}
+                    id={result.belongs_to_collection.id}
+                    imageUrl={result.belongs_to_collection.poster_path}
+                    title={result.belongs_to_collection.name}
                   />
-                ))}
-              </Section>
-            )}
-            {result.belongs_to_collection && visible === "Collection" && (
-              <Section>
-                <Poster
-                  key={result.belongs_to_collection.id}
-                  id={result.belongs_to_collection.id}
-                  imageUrl={result.belongs_to_collection.poster_path}
-                  title={result.belongs_to_collection.name}
-                />
-              </Section>
-            )}
-            {result.seasons && visible === "Seasons" && (
-              <Section>
-                {result.seasons.map((season) => (
-                  <Poster
-                    key={season.id}
-                    id={season.id}
-                    imageUrl={season.poster_path}
-                    title={season.name}
-                  />
-                ))}
-              </Section>
-            )}
+                </Section>
+              )}
+              {result.seasons && visible === "Seasons" && (
+                <Section>
+                  {result.seasons.map((season) => (
+                    <Poster
+                      key={season.id}
+                      id={season.id}
+                      imageUrl={season.poster_path}
+                      title={season.name}
+                    />
+                  ))}
+                </Section>
+              )}
+            </EtcContainer>
             {result.videos.results.length > 0 && visible === "Trailer" && (
               <>
                 <VideoContainer>
