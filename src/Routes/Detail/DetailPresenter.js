@@ -102,6 +102,7 @@ const Item = styled.span`
 
 const Divider = styled.span`
   margin: 0 10px;
+  vertical-align: middle;
 `;
 
 const Overview = styled.p`
@@ -232,7 +233,6 @@ const DetailPresenter = withRouter(
                         )
                       }
                     />
-                    )
                   </Item>
                 </>
               )}
