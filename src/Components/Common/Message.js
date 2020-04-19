@@ -13,8 +13,6 @@ const Text = styled.span`
 `;
 
 const Message = ({ text, color }) => {
-  console.log("색상", color);
-
   return (
     <Container>
       <Text color={color}>{text}</Text>

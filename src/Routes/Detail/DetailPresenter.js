@@ -97,6 +97,7 @@ const ItemContainer = styled.div`
 
 const Item = styled.span`
   margin-bottom: 10px;
+  vertical-align: middle;
 `;
 
 const Divider = styled.span`
@@ -219,6 +220,22 @@ const DetailPresenter = withRouter(
                       : `${genre.name} / `,
                   )}
               </Item>
+              {result.imdb_id && (
+                <>
+                  <Divider>ㆍ</Divider>
+                  <Item>
+                    <Icon
+                      src={require("assets/imdb.png")}
+                      onClick={() =>
+                        window.open(
+                          `https://www.imdb.com/title/${result.imdb_id}`,
+                        )
+                      }
+                    />
+                    )
+                  </Item>
+                </>
+              )}
             </ItemContainer>
             <Overview>{result.overview}</Overview>
             <TabContainer>

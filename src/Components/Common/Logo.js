@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = styled.img`
-  /* background-image: url(${(props) => props.Bgimg}); */
   height: 30px;
   background-size: cover;
   border-radius: 4px;
-  :not(:last-child){
-      margin-right:5px;
+  :not(:last-child) {
+    margin-right: 5px;
   }
 `;
 
@@ -25,7 +24,6 @@ const StyledSpan = styled.span`
 `;
 
 const Logo = ({ data }) => {
-  console.log("logo", data);
   return (
     <LogoContainer>
       {data && data.length > 1 ? (
